@@ -36,7 +36,7 @@ const _convert = async (img) => {
  * Process image and return the predictions.
  *
  * @param {Buffer} imageBuffer - Buffer containing the image.
- * @returns {Promise<Array<predictionType>>} - Array of predictions.
+ * @returns {Promise<Array<*>>} - Array of predictions.
  */
 const processImage = async (imageBuffer) => {
   const image = await _convert(imageBuffer);
@@ -52,7 +52,7 @@ const processImage = async (imageBuffer) => {
  * Process gif and return the predictions.
  *
  * @param {Buffer} gifBuffer - Buffer containing the gif.
- * @returns {Promise<Array<predictionType>>} - Array of predictions.
+ * @returns {Promise<Array<*>>} - Array of predictions.
  */
 const processGif = async (gifBuffer) => {
   // TODO: Implement
@@ -66,6 +66,10 @@ const processGif = async (gifBuffer) => {
  * @returns {Promise<void>} - Promise that resolves when the model is loaded.
  */
 const load_model = async () => {
+  // if (process.env.ENV.includes('prod')) {
+  // }
+  tf.enableProdMode();
+
   _model = await nsfw.load();
 };
 

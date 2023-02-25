@@ -3,11 +3,17 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const multer = require('multer');
+const os = require("os");
 
 const app = express();
-const upload = multer();
 const ball_reply = require('./8-ball');
 const nsfw = require('./nsfw');
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => cb(null, os.tmpdir()),
+    filename: (req, file, cb) => cb(null, file.originalname)
+  })
+});
 
 app.use(cors());
 app.use(bodyParser.json());
