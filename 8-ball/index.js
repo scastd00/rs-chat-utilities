@@ -23,14 +23,12 @@ function getReply(question, lucky) {
   if ((rating.score > 0 && lucky) || (rating.score < 0 && !lucky)) {
     response = {
       question,
-      lucky,
       reading: positive[(Math.floor(random * positive.length))],
       sentiment: rating
     };
   } else if ((rating.score < 0 && lucky) || (rating.score > 0 && !lucky)) {
     response = {
       question,
-      lucky,
       reading: negative[(Math.floor(random * negative.length))],
       sentiment: rating
     };
