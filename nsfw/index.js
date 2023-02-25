@@ -13,7 +13,7 @@ const NUM_CHANNELS = 3;
  * Convert image to tensor.
  *
  * @param {Buffer} img
- * @returns {Promise<Tensor<Rank.R3>>} - Tensor with shape [height, width, 3]
+ * @returns {Promise<tf.Tensor3D>} - Tensor with shape [height, width, 3]
  * @private
  */
 const _convert = async (img) => {

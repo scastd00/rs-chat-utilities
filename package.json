@@ -1,15 +1,23 @@
 {
-  "name": "rs-chat-utilities",
-  "version": "1.0.0",
-  "dependencies": {
-    "@tensorflow/tfjs-node": "^3.21.1",
-    "body-parser": "^1.20.2",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "jpeg-js": "^0.4.4",
-    "multer": "^1.4.5-lts.1",
-    "nsfwjs": "^2.4.2",
-    "sentiment": "^5.0.2"
-  }
+	"name": "rs-chat-utilities",
+	"version": "1.0.0",
+	"scripts": {
+		"start": "nodemon main.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"dependencies": {
+		"@tensorflow/tfjs-node": "^3.21.1",
+		"body-parser": "^1.20.2",
+		"cors": "^2.8.5",
+		"dotenv": "^16.0.3",
+		"express": "^4.18.2",
+		"jpeg-js": "^0.4.4",
+		"multer": "^1.4.5-lts.1",
+		"nsfwjs": "^2.4.2",
+		"sentiment": "^5.0.2",
+		"sharp": "^0.31.3"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.20"
+	}
 }
