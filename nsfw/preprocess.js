@@ -9,12 +9,14 @@ const sharp = require('sharp');
  * @returns {*} - Response if file is missing, otherwise next middleware.
  */
 async function fileBufferMiddleware(req, res, next) {
-  if (!req.file) {
-    return res.status(400).send("Missing file");
+  const { imagePath } = req.body;
+
+  if (!imagePath) {
+    return res.status(400).send("Missing file path.");
   }
 
   // Resize image to 299x299
-  req.fileBuffer = await sharp(req.file.path)
+  req.fileBuffer = await sharp(imagePath)
     .resize(299, 299, { fit: 'contain' })
     .flatten()
     .jpeg({ quality: 100 })
