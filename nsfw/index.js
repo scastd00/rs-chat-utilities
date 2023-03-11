@@ -66,8 +66,6 @@ const processGif = async (gifBuffer) => {
  * @returns {Promise<void>} - Promise that resolves when the model is loaded.
  */
 const load_model = async () => {
-  // if (process.env.ENV.includes('prod')) {
-  // }
   tf.enableProdMode();
 
   _model = await nsfw.load();
