@@ -1,18 +1,18 @@
 const sharp = require('sharp');
 
 /**
- * Middleware to extract the file buffer from the request.
+ * Middleware to extract the image buffer from the request.
  *
  * @param req - Request object.
  * @param res - Response object.
  * @param next - Next middleware.
- * @returns {*} - Response if file is missing, otherwise next middleware.
+ * @returns {Promise<*>} - Response if image is missing, otherwise next middleware.
  */
-async function fileBufferMiddleware(req, res, next) {
+async function imageBufferMiddleware(req, res, next) {
   const { imagePath } = req.body;
 
   if (!imagePath) {
-    return res.status(400).send("Missing file path.");
+    return res.status(400).send("Missing image path.");
   }
 
   // Resize image to 299x299
@@ -25,4 +25,28 @@ async function fileBufferMiddleware(req, res, next) {
   next();
 }
 
-module.exports = fileBufferMiddleware;
+/**
+ * Middleware to extract the gif buffer from the request.
+ *
+ * @param req - Request object.
+ * @param res - Response object.
+ * @param next - Next middleware.
+ * @returns {Promise<*>} - Response if gif is missing, otherwise next middleware.
+ */
+async function gifBufferMiddleware(req, res, next) {
+  const { imagePath } = req.body;
+
+  if (!imagePath) {
+    return res.status(400).send("Missing gif path.");
+  }
+
+  // Resize gif to 299x299
+  req.fileBuffer = await sharp(imagePath, { animated: true })
+    .resize(299, 299, { fit: 'contain' })
+    .gif({ effort: 4 })
+    .toBuffer();
+
+  next();
+}
+
+module.exports = { imageBufferMiddleware, gifBufferMiddleware };
