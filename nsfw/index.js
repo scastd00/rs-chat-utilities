@@ -13,7 +13,7 @@ const NUM_CHANNELS = 3;
  * Convert image to tensor.
  *
  * @param {Buffer} img
- * @returns {Promise<Tensor<Rank.R3>>} - Tensor with shape [height, width, 3]
+ * @returns {Promise<tf.Tensor3D>} - Tensor with shape [height, width, 3]
  * @private
  */
 const _convert = async (img) => {
@@ -36,7 +36,7 @@ const _convert = async (img) => {
  * Process image and return the predictions.
  *
  * @param {Buffer} imageBuffer - Buffer containing the image.
- * @returns {Promise<Array<predictionType>>} - Array of predictions.
+ * @returns {Promise<Array<*>>} - Array of predictions.
  */
 const processImage = async (imageBuffer) => {
   const image = await _convert(imageBuffer);
@@ -52,7 +52,7 @@ const processImage = async (imageBuffer) => {
  * Process gif and return the predictions.
  *
  * @param {Buffer} gifBuffer - Buffer containing the gif.
- * @returns {Promise<Array<predictionType>>} - Array of predictions.
+ * @returns {Promise<Array<*>>} - Array of predictions.
  */
 const processGif = async (gifBuffer) => {
   // TODO: Implement
@@ -66,6 +66,8 @@ const processGif = async (gifBuffer) => {
  * @returns {Promise<void>} - Promise that resolves when the model is loaded.
  */
 const load_model = async () => {
+  tf.enableProdMode();
+
   _model = await nsfw.load();
 };
 
