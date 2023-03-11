@@ -1,4 +1,4 @@
-FROM node:buster-slim
+FROM node:18
 
 WORKDIR /app
 COPY package*.json ./
@@ -6,8 +6,7 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-
-RUN apt-get update && apt-get install -y build-essential wget python3 make gcc curl libc6-dev
+COPY --from=tarampampam/curl:7.78.0 /bin/curl /bin/curl
 
 EXPOSE 4042
 CMD [ "node", "forever_main.js" ]
