@@ -1,9 +1,10 @@
 const forever = require('forever-monitor');
 const child = new (forever.Monitor)('main.js', {
   uid: 'rs-chat-utilities',
-  silent: true,
+  silent: false,
   args: [],
-  killTree: true
+  killTree: true,
+  spinSleepTime: 1000,
 });
 
 child.on('watch:restart', (info) => {
@@ -16,6 +17,10 @@ child.on('restart', () => {
 
 child.on('exit:code', (code) => {
   console.error('Forever detected script exited with code ' + code);
+});
+
+child.on('stderr', (data) => {
+  console.error('Forever detected script exited with error ' + data);
 });
 
 child.start();
