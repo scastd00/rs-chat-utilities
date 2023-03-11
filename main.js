@@ -1,8 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const path = require("path");
-const dotenv = require('dotenv').config({ path: path.resolve(process.cwd(), 'env', '.env') });
 const preprocess = require('./nsfw/preprocess');
 
 const app = express();
@@ -11,7 +9,7 @@ const nsfw = require('./nsfw');
 app.use(cors());
 app.use(bodyParser.json());
 
-const port = dotenv.parsed.PORT || 3000;
+const port = 4042;
 
 app.post('/api/v1/nsfw/image', preprocess.imageBufferMiddleware, async (req, res) => {
   const predictions = await nsfw.processImage(req.fileBuffer);

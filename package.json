@@ -2,7 +2,7 @@
 	"name": "rs-chat-utilities",
 	"version": "1.0.0",
 	"scripts": {
-		"start": "nodemon main.js",
+		"start": "node forever_main.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"dependencies": {
@@ -11,11 +11,9 @@
 		"cors": "^2.8.5",
 		"dotenv": "^16.0.3",
 		"express": "^4.18.2",
+		"forever-monitor": "^3.0.3",
 		"jpeg-js": "^0.4.4",
 		"nsfwjs": "^2.4.2",
 		"sharp": "^0.31.3"
-	},
-	"devDependencies": {
-		"nodemon": "^2.0.20"
 	}
 }
