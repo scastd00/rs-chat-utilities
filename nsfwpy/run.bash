@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cd "$VIRTUAL_ENV"/src && flask run --port "$PORT" --host "$HOST_ADDR"
+source bin/activate && cd src && flask run --port "$PORT" --host "$HOST_ADDR"

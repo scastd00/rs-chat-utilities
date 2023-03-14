@@ -18,8 +18,6 @@ RUN wget --load-cookies /tmp/cookies.txt \
 
 WORKDIR /app
 
-COPY ./run.bash .
-
 ENV VIRTUAL_ENV=nsfwpy
 RUN python3 -m venv $VIRTUAL_ENV
 ENV PATH="/app/$VIRTUAL_ENV/bin:$PATH"
@@ -30,9 +28,15 @@ RUN pip install flask flask-restful nsfw-detector
 
 RUN mkdir $VIRTUAL_ENV/src
 COPY src/ $VIRTUAL_ENV/src/
+COPY include/ $VIRTUAL_ENV/include/
+
+WORKDIR /app/$VIRTUAL_ENV
+COPY run.bash .
 
 ENV PORT=4042
 ENV HOST_ADDR=0.0.0.0
+ENV MODEL_PATH=/app/$VIRTUAL_ENV/include/model/nsfw.299x299.h5
 
 EXPOSE $PORT
+
 CMD [ "./run.bash" ]
